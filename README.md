@@ -2,7 +2,7 @@ This project created for parsing site https://ebisan.ru/
 
 To start it:
 
-git clone git@github.com:Sh1nryu-Megami/ProjectPars.git
+git clone git@github.com:Sh1nryu-Megami/MIPT-ProjectPars.git
 
 cd MIPT-ProjectPars
 
