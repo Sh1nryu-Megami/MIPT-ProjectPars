@@ -24,6 +24,28 @@ def select_about_dish(selected_dish):
     return jsonify(cursor.fetchall())
 
 
+@app.route('/select_all_entity/<selected_entity>')
+def select_all_entity(selected_entity):
+    conn = connect_to_database()
+    cursor = conn.cursor()
+    cursor.execute(
+        """SELECT dish_type, dish_name, dish_grams, dish_price FROM food_positions
+        WHERE LOWER(dish_details) NOT LIKE LOWER(%s)""",
+        ('%' + selected_entity + '%',))
+    return jsonify(cursor.fetchall())
+
+@app.route('/select_entity/<selected_entity>/<selected_type>')
+def select_entity(selected_entity, selected_type=None):
+    conn = connect_to_database()
+    cursor = conn.cursor()
+    cursor.execute(
+        """SELECT dish_type, dish_name, dish_grams, dish_price FROM food_positions 
+        WHERE LOWER(dish_details) NOT LIKE LOWER(%s)
+        AND dish_type = %s""",
+        ('%' + selected_entity + '%', selected_type))
+    return jsonify(cursor.fetchall())
+
+
 @app.route('/select_selected_type/<selected_type>')
 def select_selected_type(selected_type):
     conn = connect_to_database()
